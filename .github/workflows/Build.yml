@@ -53,7 +53,7 @@ jobs:
       - name: Build
         run: |
           cd ~/source-engine
-          ./waf configure -T release --togles --android=aarch64,host,21 --64bits
+          ./waf configure -T debug --android=armeabi-v7a-hard,host,21 --togles --disable-warns
           ./waf build
           echo "Build Log"
           cat build/config.log
