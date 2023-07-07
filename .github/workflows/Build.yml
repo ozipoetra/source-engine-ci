@@ -33,8 +33,8 @@ jobs:
           mkdir clang
           wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
           tar -Jxf clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz --directory ~/clang
-          export PATH="~/clang/bin:$PATH"
-          ls ~/clang
+          export PATH="~/clang/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH"
+          ls ~/clang/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04
 
       - name: Install NDK
         run: |
