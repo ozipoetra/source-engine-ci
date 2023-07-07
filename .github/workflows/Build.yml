@@ -33,7 +33,7 @@ jobs:
           mkdir clang
           wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
           tar -Jxf clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz --directory ~/clang
-          export PATH="~/clang/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH"
+          export PATH="$(PWD)/clang/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH"
           ls ~/clang/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04
 
       - name: Install NDK
@@ -41,8 +41,8 @@ jobs:
           cd ~
           wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip -q android-ndk-r10e-linux-x86_64.zip
-          export ANDROID_NDK_HOME="~/android-ndk-r10e/"
-          export NDK_HOME="~/android-ndk-r10e/"
+          export ANDROID_NDK_HOME="$(PWD)/android-ndk-r10e/"
+          export NDK_HOME="$(PWD)/android-ndk-r10e/"
           ls
 
       - name: Clone Source
@@ -53,5 +53,5 @@ jobs:
       - name: Build
         run: |
           cd ~/source-engine
-          ./waf configure -T release --togles --android=aarch64,host,21 --64bits
+          ./waf configure -T debug --togles --android=aarch64,host,21 --64bits
           ./waf build
