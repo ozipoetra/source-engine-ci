@@ -40,6 +40,18 @@ jobs:
 
       - name: Install NDK
         run: |
+          cd ~
           wget https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip android-ndk-r10e-linux-x86_64.zip
-          export ANDROID_NDK_HOME="android-ndk-r10e"
+          export ANDROID_NDK_HOME="~/android-ndk-r10e"
+
+      - name: Clone Source
+        run: |
+          cd ~
+          git clone https://github.com/nillerusr/source-engine --recursive --depth=1
+
+      - name: Build
+        run: |
+          cd ~/source-engine
+          ./waf configure --togles --android=aarch64,host,21 --64bits
+          ./waf build
