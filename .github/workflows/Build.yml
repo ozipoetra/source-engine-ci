@@ -26,24 +26,22 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Update Dependency
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential gcc-multilib g++-multilib pkg-config ccache
 
       - name: Install Clang
         run: |
           cd ~
-          wget https://github.com/mitsu00/build_test/releases/download/clang/clang.zip
-          unzip clang.zip -d clang
+          wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+          tar -xf clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz --directory clang
           export PATH="~/clang/bin:$PATH"
+          ls
 
       - name: Install NDK
         run: |
           cd ~
-          wget https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+          wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip android-ndk-r10e-linux-x86_64.zip
           export ANDROID_NDK_HOME="~/android-ndk-r10e"
+          ls
 
       - name: Clone Source
         run: |
