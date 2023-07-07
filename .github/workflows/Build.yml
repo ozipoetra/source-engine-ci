@@ -40,8 +40,9 @@ jobs:
         run: |
           cd ~
           wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
-          unzip android-ndk-r10e-linux-x86_64.zip
-          export ANDROID_NDK_HOME="~/android-ndk-r10e"
+          unzip -q android-ndk-r10e-linux-x86_64.zip
+          export ANDROID_NDK_HOME="~/android-ndk-r10e/"
+          export NDK_HOME="~/android-ndk-r10e/"
           ls
 
       - name: Clone Source
