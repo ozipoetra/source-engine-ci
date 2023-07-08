@@ -29,7 +29,9 @@ jobs:
       # Runs a single command using the runners shell
 
       - name: Install clang+llvm APT
-        run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+        run: |
+          sudo apt update
+          sudo apt install -y clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm python3-clang
 
       - name: Build
         run: |
