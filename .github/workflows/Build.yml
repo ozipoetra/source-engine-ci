@@ -35,7 +35,7 @@ jobs:
 
       - name: Build
         run: |
-          cd ~
+          cd $GITHUB_WORKSPACE
           wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip -q android-ndk-r10e-linux-x86_64.zip
           export ANDROID_NDK_HOME="$(pwd)/android-ndk-r10e"
@@ -47,4 +47,10 @@ jobs:
           echo "Build Folder"
           ls build
           #cat build/config.log
-          
+
+     - name: Upload AnyKernel3
+        #if: env.CHECK_FILE_IS_OK == 'true'
+       uses: actions/upload-artifact@v3
+       with:
+         name: build
+         path: source-engine/build/*
