@@ -48,9 +48,9 @@ jobs:
           ls build
           #cat build/config.log
 
-     - name: Upload AnyKernel3
+      - name: Upload AnyKernel3
         #if: env.CHECK_FILE_IS_OK == 'true'
-       uses: actions/upload-artifact@v3
-       with:
-         name: build
-         path: source-engine/build/*
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: source-engine/build/*
