@@ -32,13 +32,14 @@ jobs:
         run: |
           cd ~
           mkdir clang
-          wget -q https://github.com/mitsu00/build_test/releases/download/clang/clang.zip
-          unzip -q clang.zip -d clang
+          wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+          tar -Jxf clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz --directory clang
+          ls ~/clang
           export PATH="$(pwd)/clang/bin:$PATH"
           wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip -q android-ndk-r10e-linux-x86_64.zip
-          export ANDROID_NDK_HOME="~/android-ndk-r10e"
-          export NDK_HOME="~/android-ndk-r10e"
+          export ANDROID_NDK_HOME="$(pwd)/android-ndk-r10e"
+          export NDK_HOME="$(pwd)/android-ndk-r10e"
           git clone https://github.com/nillerusr/source-engine --recursive --depth=1
           cd source-engine
           ./waf configure -T release --android=aarch64,host,21 --togles --disable-warns --64bits
