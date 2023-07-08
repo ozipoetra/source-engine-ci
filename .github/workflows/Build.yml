@@ -28,33 +28,23 @@ jobs:
 
       # Runs a single command using the runners shell
 
-      - name: Install Clang
+      - name: Build
         run: |
           cd ~
           mkdir clang
           wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
           tar -xf clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
-          export PATH="$(pwd)/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH"
+          export PATH="~/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH"
           ls ~/clang+llvm-11.1.0-x86_64-linux-gnu-ubuntu-16.04
-
-      - name: Install NDK
-        run: |
-          cd ~
           wget -q https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
           unzip -q android-ndk-r10e-linux-x86_64.zip
-          export ANDROID_NDK_HOME="$(pwd)/android-ndk-r10e/"
-          echo NDK_HOME="$(pwd)/android-ndk-r10e/"
+          export ANDROID_NDK_HOME="~/android-ndk-r10e"
+          export NDK_HOME="~/android-ndk-r10e"
           ls
-
-      - name: Clone Source
-        run: |
           cd ~
           git clone https://github.com/nillerusr/source-engine --recursive --depth=1
-
-      - name: Build
-        run: |
           cd ~/source-engine
-          ./waf configure -T debug --android=armeabi-v7a-hard,host,21 --togles --disable-warns
+          ./waf configure -T release --android=armeabi-v7a-hard,host,21 --togles --disable-warns
           ./waf build
           echo "Build Log"
           cat build/config.log
